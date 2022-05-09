@@ -4,8 +4,7 @@
 	"description": "An FCC Backend Challenge",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon index.js",
-		"start:dev": "PORT=3000 nodemon index.js"
+		"start": "node index.js"
 	},
 	"dependencies": {
 		"cors": "^2.8.0",
@@ -21,8 +20,5 @@
 		"express",
 		"freecodecamp"
 	],
-	"license": "MIT",
-	"devDependencies": {
-		"nodemon": "^2.0.16"
-	}
+	"license": "MIT"
 }
