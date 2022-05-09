@@ -1,18 +1,20 @@
-function timeStampResponse(req, res, input) {
+exports.inputCheck = (req, res, next) => {
+    let input = req.params.input;
+
+    if (input === undefined) input = new Date();
+
     if (Number.isInteger(Number(input))) input = new Date(Number(input));
-    let unix = Date.parse(input);
-    let utc = new Date(unix).toUTCString();
-    if (isNaN(unix)) {
+
+    req.unix = Date.parse(input);
+    req.utc = new Date(req.unix).toUTCString();
+
+    if (isNaN(req.unix)) {
         res.json({ error: 'Invalid date' });
     } else {
-        res.json({ unix, utc });
+        next();
     }
-}
-
-exports.getCurrentTimestamp = (req, res) => {
-    timeStampResponse(req, res, Date.now());
 };
 
-exports.getInputTimestamp = (req, res) => {
-    timeStampResponse(req, res, req.params.input);
+exports.getTimestamp = (req, res) => {
+    res.json({ unix: req.unix, utc: req.utc });
 };
